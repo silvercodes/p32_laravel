@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -12,4 +13,7 @@ Route::get('/posts', [PostController::class, 'index'])
 
 Route::get('/posts/{post}', [PostController::class, 'show'])
     ->name('posts.show');
+
+Route::post('/orders', [OrderController::class, 'process'])
+    ->name('orders.process');
 
