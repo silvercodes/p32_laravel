@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\CheckAgeMiddleware;
+use App\Http\Middleware\LogRequestMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -14,6 +16,16 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->validateCsrfTokens(except: [
             '/orders'
         ]);
+
+        $middleware->append([
+            LogRequestMiddleware::class,
+        ]);
+
+        $middleware->alias([
+            'age' => CheckAgeMiddleware::class,
+        ]);
+
+
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
