@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\BladeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
@@ -115,9 +118,17 @@ Route::prefix('posts')
     });
 
 
+// ---------------
+Route::get('/directives', [BladeController::class, 'directives']);
 
+Route::get('/inheritance', [BladeController::class, 'inheritance']);
 
+// -----------
 
+Route::get('/posts', [PostController::class, 'index'])
+    ->name('posts.index');
 
+Route::get('/posts/{post}', [PostController::class, 'show'])
+    ->name('posts.show');
 
-
+Route::view('/about', 'pages.about')->name('about');
