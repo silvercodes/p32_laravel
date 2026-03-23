@@ -100,6 +100,11 @@ use Illuminate\Support\Facades\Route;
 
 
 
+Route::view('/', 'pages.home')->name('home');
+Route::view('/about', 'pages.about')->name('about');
+Route::view('/contact', 'pages.contact')->name('contact');
+
+
 Route::prefix('posts')
     ->name('posts.')
     ->group(function () {
@@ -119,16 +124,13 @@ Route::prefix('posts')
 
 
 // ---------------
-Route::get('/directives', [BladeController::class, 'directives']);
-
-Route::get('/inheritance', [BladeController::class, 'inheritance']);
-
+Route::prefix('views')
+    ->name('views.')
+    ->group(function () {
+        Route::get('/directives', [BladeController::class, 'directives'])->name('directives');
+        Route::get('/inheritance', [BladeController::class, 'inheritance'])->name('inheritance');
+    });
 // -----------
 
-Route::get('/posts', [PostController::class, 'index'])
-    ->name('posts.index');
 
-Route::get('/posts/{post}', [PostController::class, 'show'])
-    ->name('posts.show');
 
-Route::view('/about', 'pages.about')->name('about');
