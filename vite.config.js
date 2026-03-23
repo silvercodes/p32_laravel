@@ -7,12 +7,13 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/app.css',
+                'resources/css/stack.css',
 
                 'resources/js/app.js'
             ],
             refresh: true,
         }),
-        tailwindcss(),
+        // tailwindcss(),
     ],
     server: {
         host: '0.0.0.0',                // Слушать все интерфейсы

@@ -119,7 +119,6 @@ Route::prefix('posts')
         Route::post('/', [PostController::class, 'store'])
             ->name('store');
 
-
     });
 
 
@@ -129,6 +128,9 @@ Route::prefix('views')
     ->group(function () {
         Route::get('/directives', [BladeController::class, 'directives'])->name('directives');
         Route::get('/inheritance', [BladeController::class, 'inheritance'])->name('inheritance');
+        Route::get('/deepinh', [BladeController::class, 'deepInheritance'])->name('deepInheritance');
+        Route::get('/stack', [BladeController::class, 'stack'])->name('stack');
+
     });
 // -----------
 

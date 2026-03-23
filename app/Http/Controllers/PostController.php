@@ -11,10 +11,13 @@ class PostController extends Controller
     {
         $posts = Post::all();
 
-        return response()->json([
-            'success' => true,
-            'data' => $posts
-        ]);
+        return view('include.posts', compact('posts'));
+
+
+//        return response()->json([
+//            'success' => true,
+//            'data' => $posts
+//        ]);
     }
 
     public function show(Post $post)

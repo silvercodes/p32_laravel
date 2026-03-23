@@ -20,4 +20,14 @@ class BladeController extends Controller
     {
         return view('pages.about');
     }
+
+    public function deepInheritance()
+    {
+        return view('deepInh.child');
+    }
+
+    public function stack()
+    {
+        return view('stack.child');
+    }
 }
