@@ -30,4 +30,9 @@ class BladeController extends Controller
     {
         return view('stack.child');
     }
+
+    public function components()
+    {
+        return view('compex.child');
+    }
 }
