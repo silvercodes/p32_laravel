@@ -3,7 +3,7 @@
 
 @section('title', 'Components')
 
-@section('content')
+{{--@section('content')--}}
 {{--    <x-alert--}}
 {{--        type="success"--}}
 {{--        message="Hello from view"--}}
@@ -36,14 +36,81 @@
 {{--    -----------------------}}
 
 
-    <x-data>Content from layout</x-data>
+@section('content')
+    <div>
+        <x-button>Click</x-button>
 
+        <x-button variant="success">Save</x-button>
+        <x-button variant="danger">Delete</x-button>
 
+        <x-button size="lg">Large button</x-button>
+        <x-button size="sm">Small button</x-button>
 
+        <x-button :disabled="true">Disabled</x-button>
+        <x-button :loading="true">Loading...</x-button>
 
+        <x-button
+            variant="success"
+            id="submit-btn"
+            data-action="save"
+        >Save</x-button>
+    </div>
 
+    <div class="container">
+        <div class="row">
+            <x-card class="col-md-6" title="Post Title" subtitle="By P32">
+                <p>This is the test content</p>
+                <a href="/posts/1" class="btn btn-primary">Read more...</a>
+            </x-card>
 
+            <x-card class="col-md-6"
+                    title="Post Title"
+                    subtitle="By P32"
+                    image="{{ Vite::asset('resources/img/cpp.png') }}"
+                    footer="20.00"
+            >
+                <p>This is the test content</p>
+                <a href="/posts/1" class="btn btn-primary">Read more...</a>
+            </x-card>
+        </div>
+    </div>
 
+    <x-class-alert
+        type="success"
+        message="Пост создан успешно"
+        :dismissible="true"
+    />
+
+    <x-class-alert
+        type="danger"
+        message="Ошибка при сохранении"
+        :dismissible="true"
+    />
+
+    <x-class-alert
+        type="success"
+        message="Все хорошо"
+    />
+
+    <x-class-alert
+        type="warning"
+        message="Проверьте данные перед отправкой"
+        class="mt-4"
+        id="warning-alert"
+    />
 
 
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+

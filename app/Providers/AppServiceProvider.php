@@ -4,6 +4,7 @@ namespace App\Providers;
 
 
 use App\Models\Post;
+use App\Services\IconService;
 use App\Services\LoggerService;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
@@ -20,6 +21,10 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(LoggerService::class, function($app) {
             return new LoggerService(storage_path('logs/app.log'));
+        });
+
+        $this->app->singleton(IconService::class, function($app) {
+            return new IconService();
         });
     }
 

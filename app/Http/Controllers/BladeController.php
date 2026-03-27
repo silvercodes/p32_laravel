@@ -35,4 +35,9 @@ class BladeController extends Controller
     {
         return view('compex.child');
     }
+
+    public function slot()
+    {
+        return view('slot.child');
+    }
 }
