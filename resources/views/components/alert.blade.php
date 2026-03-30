@@ -22,7 +22,6 @@
 {{--        <i class="bi bi-airplane-engines-fill"></i>--}}
 {{--    @endif--}}
 
-{{--    TODO: icon size???--}}
     @if($type === 'success')
         <svg class="bi me-2 shrink-0" style="height: 100px; width: 100px" role="img">
             <use xlink:href="#check-circle-fill" />

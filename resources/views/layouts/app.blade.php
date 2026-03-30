@@ -11,7 +11,7 @@
 </head>
 <body>
 
-@include('components.icons')
+{{--TODO: svg icons???--}}
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
     <div class="container">

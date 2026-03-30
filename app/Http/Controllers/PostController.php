@@ -2,47 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
 class PostController extends Controller
 {
+
     public function index()
     {
         $posts = Post::all();
 
-        return view('include.posts', compact('posts'));
-
-
-//        return response()->json([
-//            'success' => true,
-//            'data' => $posts
-//        ]);
+        return view('posts.index', compact('posts'));
     }
 
-    public function show(Post $post)
+    public function show(Collection $post)
     {
-        return response()->json([
-            'success' => true,
-            'data' => $post
-        ]);
-    }
 
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'title' => 'required',
-            'content' => 'required|string',
-            'author_id' => 'required|integer|exists:users,id',
-            'is_published' => 'boolean',
-            'slug' => 'required|string|unique:posts,slug'
-        ]);
-
-        $post = Post::create($validated);
-
-        return response()->json([
-            'success' => true,
-            'data' => $post
-        ], 201);
     }
 }
