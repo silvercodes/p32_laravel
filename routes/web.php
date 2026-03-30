@@ -5,6 +5,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\ValidationController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
@@ -134,6 +135,12 @@ Route::prefix('views')
         Route::get('/slot', [BladeController::class, 'slot'])->name('slot');
     });
 // -----------
+
+Route::prefix('validation')
+    ->name('validation.')
+    ->group(function () {
+        Route::post('/', [ValidationController::class, 'intro']);
+    });
 
 
 
