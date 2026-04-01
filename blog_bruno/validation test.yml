@@ -6,6 +6,17 @@ info:
 http:
   method: POST
   url: http://localhost/validation
+  body:
+    type: json
+    data: |-
+      {
+        "user": {
+          
+        },
+        "posts": [
+          
+        ]
+      }
   auth: inherit
 
 settings:
