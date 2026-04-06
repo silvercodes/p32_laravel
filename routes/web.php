@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BladeController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProjectController;
@@ -154,3 +155,9 @@ Route::prefix('posts')
         Route::put('/{post}',       [PostController::class, 'update'])  ->name('update');
         Route::delete('/{post}',    [PostController::class, 'destroy']) ->name('destroy');
     });
+
+
+Route::middleware('auth')->prefix('comments')->name('comments.')->group(function () {
+    Route::post('/posts/{post}', [CommentController::class, 'store'])->name('store');
+    Route::delete('/{comment}', [CommentController::class, 'destroy'])->name('destroy');
+});
