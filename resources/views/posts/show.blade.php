@@ -40,7 +40,7 @@
                     </div>
 
                     <div class="card-text">
-                        {!! nl2br(e($post->content)) !!}
+                        {!! nl2br(e(str_replace('\n', "\n", $post->content))) !!}
                     </div>
 
                     <hr class="my-4">
