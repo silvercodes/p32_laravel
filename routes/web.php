@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BladeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\OrderController;
@@ -161,3 +162,21 @@ Route::middleware('auth')->prefix('comments')->name('comments.')->group(function
     Route::post('/posts/{post}', [CommentController::class, 'store'])->name('store');
     Route::delete('/{comment}', [CommentController::class, 'destroy'])->name('destroy');
 });
+
+
+
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+
+    Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+    Route::post('/register', [AuthController::class, 'register']);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+
+
+
+
