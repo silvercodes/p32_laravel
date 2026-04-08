@@ -6,9 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class EditPostRequest extends FormRequest
 {
-    // TODO: redirect with route parameter ???
-    protected $redirectRoute = 'posts.edit';
-
     public function authorize(): bool
     {
         return true;
@@ -20,6 +17,12 @@ class EditPostRequest extends FormRequest
             'title' => 'required|string|max:255',
             'content' => 'required|string|min:10',
         ];
+    }
+
+    public function redirect(): string
+    {
+        $postId = $this->route('post');
+        return route('posts.edit', ['post' => $postId]);
     }
 
     public function messages(): array
