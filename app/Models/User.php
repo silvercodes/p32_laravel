@@ -47,6 +47,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'is_premium'
     ];
 
     /**
@@ -69,11 +71,27 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_premium' => 'boolean',
         ];
+    }
+
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class, 'author_id');
     }
 
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isPremium(): bool
+    {
+        return $this->is_premium === true;
     }
 }

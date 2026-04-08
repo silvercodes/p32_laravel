@@ -85,6 +85,10 @@
 
 
 
+{{--@can('access-admin-panel')--}}
+{{--    <a href="">Admin panel</a>--}}
+{{--@endcan--}}
+
 
 
 

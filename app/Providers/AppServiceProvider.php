@@ -5,11 +5,13 @@ namespace App\Providers;
 
 use App\Composers\RoleComposer;
 use App\Models\Post;
+use App\Policies\PostPolicy;
 use App\Services\IconService;
 use App\Services\LoggerService;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
@@ -17,6 +19,11 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+//    protected $policies = [
+//        Post::class => PostPolicy::class,
+//    ];
+
+
     /**
      * Register any application services.
      */
@@ -68,6 +75,21 @@ class AppServiceProvider extends ServiceProvider
 
         ///////
         View::composer('*', RoleComposer::class);
+
+
+        // ------------------------------ GATES ----------------------------
+//        Gate::define('access-admin-panel', function ($user) {
+//            return $user->role === 'admin';
+//        });
+//
+//        Gate::define('delete-any-post', function ($user) {
+//            return $user->role === 'admin';
+//        });
+//
+//        Gate::define('create-post', function ($user) {
+//            return $user->email_verified_at !== null;
+//        });
+
 
     }
 }

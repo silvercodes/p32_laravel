@@ -100,6 +100,14 @@ use Illuminate\Support\Facades\Route;
 //    Route::get('/posts', ....);
 //});
 
+//Route::get('/admin/dashboard', function () {
+//    return 'This is dashboard';
+//})->middleware('can:access-admin-panel');
+//
+//Route::middleware('can:access-admin-panel')->group(function () {
+//
+//});
+
 
 
 
@@ -145,22 +153,30 @@ Route::prefix('validation')
     });
 
 
-Route::prefix('posts')
+// ============ POSTS ==================
+
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show')
+    ->where('post', '[0-9]+');
+
+Route::middleware('auth')
+    ->prefix('posts')
     ->name('posts.')
     ->group(function () {
-        Route::get('/',             [PostController::class, 'index'])   ->name('index');
         Route::get('/create',       [PostController::class, 'create'])  ->name('create');
         Route::post('/',            [PostController::class, 'store'])   ->name('store');
-        Route::get('/{post}',       [PostController::class, 'show'])    ->name('show');
         Route::get('/{post}/edit',  [PostController::class, 'edit'])    ->name('edit');
         Route::put('/{post}',       [PostController::class, 'update'])  ->name('update');
         Route::delete('/{post}',    [PostController::class, 'destroy']) ->name('destroy');
     });
 
 
-Route::middleware('auth')->prefix('comments')->name('comments.')->group(function () {
-    Route::post('/posts/{post}', [CommentController::class, 'store'])->name('store');
-    Route::delete('/{comment}', [CommentController::class, 'destroy'])->name('destroy');
+Route::middleware('auth')
+    ->prefix('comments')
+    ->name('comments.')
+    ->group(function () {
+        Route::post('/posts/{post}', [CommentController::class, 'store'])->name('store');
+        Route::delete('/{comment}', [CommentController::class, 'destroy'])->name('destroy');
 });
 
 
