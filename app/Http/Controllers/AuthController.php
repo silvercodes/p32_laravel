@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Nette\Schema\ValidationException;
 
 class AuthController extends Controller
 {
@@ -28,9 +27,9 @@ class AuthController extends Controller
             return redirect()->route('home');
         }
 
-        throw ValidationException::withMessage([
+        return back()->withErrors([
             'email' => 'Неверный логин или пароль',
-        ]);
+        ])->onlyInput('email');
     }
 
     public function showRegisterForm()
