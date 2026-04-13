@@ -41,9 +41,9 @@
                                 required
                             >
                             @error('password')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
 
                         <button type="submit" class="btn btn-primary">Войти</button>
                     </form>

@@ -28,7 +28,7 @@ class PostPolicy
      */
     public function view(User $user, Post $post): bool
     {
-        return $post->is_published || $user->id = $post->author_id;
+        return $post->is_published || $user->id === $post->author_id;
     }
 
     /**

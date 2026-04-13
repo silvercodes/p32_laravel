@@ -12,7 +12,9 @@
         <div class="col-12">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h1>{{ $pageTitle }}</h1>
-                <a href="{{ route('posts.create') }}" class="btn btn-primary">Создать пост</a>
+                @can('create', \App\Models\Post::class)
+                    <a href="{{ route('posts.create') }}" class="btn btn-primary">Создать пост</a>
+                @endcan
             </div>
         </div>
 
@@ -36,4 +38,5 @@
         @endif
     </div>
 @endsection
+
 

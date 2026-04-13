@@ -7,6 +7,7 @@ use App\Http\Requests\Prod\EditPostRequest;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 use Str;
 
 class PostController extends Controller
@@ -21,6 +22,9 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
+        // TODO: ??? for anonymus
+        $this->authorize('view', $post);
+
         return view('posts.show', compact('post'));
     }
 
@@ -36,7 +40,7 @@ class PostController extends Controller
         $validated = $request->validated();
 
         // TODO: this is MOCK
-        $validated['author_id'] = 1;
+        $validated['author_id'] = Auth::user()->id;
         $validated['slug'] = Str::slug(Str::limit($validated['title'], 10));
 
         Post::create($validated);
@@ -51,6 +55,8 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
+        $this->authorize('update', $post);
+
         return view('posts.edit', compact('post'));
     }
 
@@ -70,6 +76,8 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
+        $this->authorize('delete', $post);
+
         $post->delete();
 
         session()->flash('alert', [

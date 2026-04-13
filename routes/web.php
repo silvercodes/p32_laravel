@@ -179,7 +179,7 @@ Route::middleware('auth')
         Route::delete('/{comment}', [CommentController::class, 'destroy'])->name('destroy');
 });
 
-
+Route::get('/test', function() {})->middleware('can:view,App\Models\Post');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
