@@ -51,10 +51,10 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-//        Auth::login($user);
-//        $request->session()->regenerate();
+        Auth::login($user);
+        $request->session()->regenerate();
 
-        return redirect()->route('login');
+        return redirect()->route('home');
     }
 
     public function logout(Request $request)
