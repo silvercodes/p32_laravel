@@ -26,9 +26,9 @@ class PostPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Post $post): bool
+    public function view(?User $user, Post $post): bool
     {
-        return $post->is_published || $user->id === $post->author_id;
+        return $post->is_published || ($user && $user->id === $post->author_id);
     }
 
     /**

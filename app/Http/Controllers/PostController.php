@@ -39,7 +39,6 @@ class PostController extends Controller
     {
         $validated = $request->validated();
 
-        // TODO: this is MOCK
         $validated['author_id'] = Auth::user()->id;
         $validated['slug'] = Str::slug(Str::limit($validated['title'], 10));
 
