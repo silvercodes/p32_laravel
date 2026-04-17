@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
-//    public function test()
-//    {
+    public function test()
+    {
 //        // ===== CREATE
 ////        $tag = new Tag();
 ////        $tag->name = 'test_1';
@@ -84,6 +84,6 @@ class TagController extends Controller
 //        $tags = Tag::search('test')->get();
 //
 //        $tags = Tag::withoutGlobalScope('fresh')->get();
-//    }
+    }
 
 }

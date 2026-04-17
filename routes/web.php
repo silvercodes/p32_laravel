@@ -8,6 +8,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\ValidationController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
@@ -194,6 +195,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-Route::get('/test', [TagController::class, 'test']);
+Route::get('/tag/test', [TagController::class, 'test']);
+Route::get('/test', [TestController::class, 'test']);
 
 

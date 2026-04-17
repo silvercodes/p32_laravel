@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PostMetadata extends Model
 {
@@ -26,5 +27,8 @@ class PostMetadata extends Model
         ];
     }
 
-
+    public function post(): BelongsTo
+    {
+        return $this->belongsTo(Post::class);
+    }
 }
