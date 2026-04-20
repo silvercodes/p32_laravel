@@ -37,11 +37,13 @@ class Post extends Model
         'content',
         'author_id',
         'is_published',
-        'slug'
+        'slug',
+        'views_count'
     ];
 
     protected $casts = [
-        'is_published' => 'boolean'     // 0/1 -> false/true;
+        'is_published' => 'boolean',     // 0/1 -> false/true;
+        'views_count' => 'integer'
     ];
 
     public function comments(): HasMany

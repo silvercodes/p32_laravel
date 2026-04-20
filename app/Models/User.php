@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -85,6 +86,18 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
+    public function postComments(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Comment::class,
+            Post::class,
+            'author_id',
+            'post_id',
+            'id',
+            'id'
+        );
+    }
+
     public function isAdmin(): bool
     {
         return $this->role === 'admin';
@@ -94,4 +107,6 @@ class User extends Authenticatable
     {
         return $this->is_premium === true;
     }
+
+
 }
