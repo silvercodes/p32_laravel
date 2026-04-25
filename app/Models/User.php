@@ -49,7 +49,8 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
-        'is_premium'
+        'is_premium',
+        'posts_count',
     ];
 
     /**
@@ -73,6 +74,7 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'is_premium' => 'boolean',
+            'posts_count' => 'integer',
         ];
     }
 

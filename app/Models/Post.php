@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 /**
  * @property int $id
@@ -32,6 +34,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class Post extends Model
 {
+    use SoftDeletes;
     protected $fillable = [
         'title',
         'content',
@@ -45,6 +48,20 @@ class Post extends Model
         'is_published' => 'boolean',     // 0/1 -> false/true;
         'views_count' => 'integer'
     ];
+
+    protected $hidden = [
+        // Поля скрываются
+    ];
+    protected $visible = [
+        // Поля для сериализации
+    ];
+
+//    protected static function booted(): void
+//    {
+//        static::creating(function (Post $post) {
+//            $post->slug = Str::slug(Str::limit($post->title, 10));
+//        });
+//    }
 
     public function comments(): HasMany
     {
@@ -65,5 +82,10 @@ class Post extends Model
     {
         return $this->BelongsToMany(Tag::class)
             ->withPivot('created_at');
+    }
+
+    public function getIsRecentAttrubute(): bool
+    {
+        return $this->created_at->isAfter(now()->subDay(7));
     }
 }

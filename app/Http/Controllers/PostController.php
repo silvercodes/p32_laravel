@@ -40,7 +40,7 @@ class PostController extends Controller
         $validated = $request->validated();
 
         $validated['author_id'] = Auth::user()->id;
-        $validated['slug'] = Str::slug(Str::limit($validated['title'], 10));
+        // $validated['slug'] = Str::slug(Str::limit($validated['title'], 10));
 
         Post::create($validated);
 

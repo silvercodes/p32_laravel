@@ -5,6 +5,7 @@ namespace App\Providers;
 
 use App\Composers\RoleComposer;
 use App\Models\Post;
+use App\Observers\PostObserver;
 use App\Policies\PostPolicy;
 use App\Services\IconService;
 use App\Services\LoggerService;
@@ -90,6 +91,6 @@ class AppServiceProvider extends ServiceProvider
 //            return $user->email_verified_at !== null;
 //        });
 
-
+        Post::observe(PostObserver::class);
     }
 }
