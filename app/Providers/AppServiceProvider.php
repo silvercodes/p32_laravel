@@ -92,5 +92,11 @@ class AppServiceProvider extends ServiceProvider
 //        });
 
         Post::observe(PostObserver::class);
+
+
+//        Queue::pipeThrough([
+//            CheckRateLimit::class,
+//        ]);
+
     }
 }

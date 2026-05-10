@@ -12,8 +12,15 @@ class SendWelcomeEmailJob implements ShouldQueue
 {
     use Queueable;
 
+//    public int $uniqueFor = 60;
+//    public function uniqueId() {
+//        return $this->user->id;
+//    }
+
     public int $tries = 3;
     public array $backoff = [10, 20];
+
+//    public $queue = 'high';
 
     public function __construct(
         public User $user

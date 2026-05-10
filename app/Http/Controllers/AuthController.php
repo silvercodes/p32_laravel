@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Jobs\SendWelcomeEmailJob;
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Bus\Batch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -55,7 +58,61 @@ class AuthController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
-        SendWelcomeEmailJob::dispatch($user);
+//        SendWelcomeEmailJob::dispatch($user)
+//            ->onQueue('high');
+
+//        SendWelcomeEmailJob::dispatch($user)
+//            ->delay(Carbon::now()->addMinute(10));
+
+
+
+
+//        SendWelcomeEmailJob::dispatch($user)
+//            ->delay(Carbon::tomorrow()->setTime(9, 0));
+//
+//        $batch = Bus::batch([
+//            new SendWelcomeEmailJob('u1@mail.com'),
+//            new SendWelcomeEmailJob('u2@mail.com'),
+//            new SendWelcomeEmailJob('u3@mail.com'),
+//            new SendWelcomeEmailJob('u4@mail.com'),
+//        ])
+//            ->then(function (Batch $batch) {
+//                \Log::info('Batch completed:' . $batch->id);
+//            })
+//            ->catch(function (Batch $batch, \Throwable $e) {
+//
+//            })
+//            ->finally(function (Batch $batch) {
+//
+//            })
+//            ->allowFailures()
+//            ->dispatch();
+//        echo $batch->totalJobs;
+//        echo $batch->pendingJobs;
+//        echo $batch->processedJobs();
+//        echo $batch->progress();
+//
+//        $b = Bus::findBatch($batchId);
+//        $batch->cancel();
+
+
+
+
+//        Bus::chain([
+//            new ProcessDataJob(),
+//            new GenerateReportJob(),
+//            new SenReportJob(),
+//        ])
+//            ->catch(function(\Throwable $e) {
+//
+//            })
+//            ->dispatch();
+
+
+
+
+        SendWelcomeEmailJob::dispatch($user)
+            ->delay(Carbon::now()->addMinute(3));
 
         return redirect()->route('home');
     }
