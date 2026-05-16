@@ -4,6 +4,8 @@ namespace App\Providers;
 
 
 use App\Composers\RoleComposer;
+use App\Events\PostPublished;
+use App\Listeners\SendPostPublishedNotification;
 use App\Models\Post;
 use App\Observers\PostObserver;
 use App\Policies\PostPolicy;
@@ -12,6 +14,7 @@ use App\Services\LoggerService;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +23,13 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+//    protected $listen = [
+//        PostPublished::class => [
+//            SendPostPublishedNotification::class,
+//        ]
+//    ];
+
+
 //    protected $policies = [
 //        Post::class => PostPolicy::class,
 //    ];
@@ -97,6 +107,11 @@ class AppServiceProvider extends ServiceProvider
 //        Queue::pipeThrough([
 //            CheckRateLimit::class,
 //        ]);
+
+        Event::listen(
+            PostPublished::class,
+            SendPostPublishedNotification::class,
+        );
 
     }
 }

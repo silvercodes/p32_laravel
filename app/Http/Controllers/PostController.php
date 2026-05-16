@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PostPublished;
 use App\Http\Requests\Prod\CreatePostRequest;
 use App\Http\Requests\Prod\EditPostRequest;
 use Illuminate\Database\Eloquent\Collection;
@@ -41,13 +42,17 @@ class PostController extends Controller
 
         $validated['author_id'] = Auth::user()->id;
         // $validated['slug'] = Str::slug(Str::limit($validated['title'], 10));
+        // TODO: for test
+        $validated['published_at'] = true;
 
-        Post::create($validated);
+        $post = Post::create($validated);
 
         session()->flash('alert', [
             'type' => 'success',
             'message' => 'Пост успешно создан'
         ]);
+
+        PostPublished::dispatch(Auth::user(), Auth::user()->email);
 
         return redirect()->route('posts.index');
     }
